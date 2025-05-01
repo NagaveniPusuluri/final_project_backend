@@ -117,6 +117,9 @@ router.get('/teammember/messages/:id', authMiddleware,async (req, res) => {
     try {
         const { id } = req.params;
         console.log(id);
+        if (!member) {
+            return res.status(404).json({ message: 'Team member not found' });
+        }
         const member = await Team.findById(id);
         const objectId = member.assignedChats.map(item => item.id)
         console.log(objectId);
