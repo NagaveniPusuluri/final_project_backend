@@ -146,18 +146,26 @@ router.put('/add-teammembers/:id',authMiddleware,async(req,res)=>{
     }
 })
 
-router.get('/message/update',authMiddleware,async(req,res)=>{
+router.put('/message/update',authMiddleware,async(req,res)=>{
 
     const {ticketId, memberId}=req.query;
     console.log(req.query);
     console.log(ticketId,memberId)
+    try{
     const member= await Team.findById(memberId)
     const ticket=await Customer.findById(ticketId)
-    member.assignedChats.push({id:ticketId})
-    ticket.assignedTo=memberId
+    if(!member || !ticket){
+        return res.status(400).json({error:"Team member or ticket not found"});
+    }
+    member.assignedChats.push({id:ticketId});
+    ticket.assignedTo=memberId;
     await member.save();
     await ticket.save();
     res.status(200).json({message:"Assigned chat successfully", assignedTo:member, assignedChat:ticket });
+}catch(err){
+    console.log(err);
+    res.status(500).json({error:"Server error"});
+}
 
 })
 
