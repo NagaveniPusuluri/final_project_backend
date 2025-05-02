@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { User, Team } = require('../model/user.schema');
-const Customer=require('../model/customer.schema');
+const {Customer}=require('../model/customer.schema');
 const bcrypt = require('bcrypt');
 const express = require('express');
 const dotenv = require('dotenv');
