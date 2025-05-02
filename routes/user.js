@@ -3,7 +3,8 @@ const { User, Team } = require('../model/user.schema');
 const Customer=require('../model/customer.schema');
 const bcrypt = require('bcrypt');
 const express = require('express');
-
+const dotenv = require('dotenv');
+dotenv.config();
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const authMiddleware = require('../Middleware/authMiddleware');
@@ -67,9 +68,8 @@ router.post('/login',async (req, res) => {
         }
         const token=jwt.sign({
             _id:user._id
-        },process.env.SECRET,{
-            expiresIn:"1d"
-        })
+        },process.env.SECRET
+    )
         res.status(200).json({ message:"User successfully logged",token, user:user});
     } catch (err) {
         console.log(err);
