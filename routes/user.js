@@ -9,9 +9,7 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const authMiddleware = require('../Middleware/authMiddleware');
 
-// router.get('/',(req,res)=>{
-//     res.status(200).json({message:'Server is up & running'});
-// })
+
 
 router.post('/signup',async (req, res) => {
     const { firstName, lastName, email, role, password, confirmPassword, agree } = req.body;
