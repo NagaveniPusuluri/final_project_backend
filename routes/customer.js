@@ -102,14 +102,15 @@ router.put('/update-status', authMiddleware ,async (req, res) => {
 });
 
 
-router.get('/', authMiddleware,async (req, res) => {
+router.get('/',authMiddleware,async (req, res) => {
     try {
         const customer = await Customer.find()
 
         res.status(200).json(customer);
     } catch (err) {
-        // res.status(500).json({ message: err.message })
-        next(err);
+        
+         res.status(500).json({ message: err.message })
+        // next(err);
     }
 })
 

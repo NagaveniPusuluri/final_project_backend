@@ -12,7 +12,7 @@ const port =process.env.PORT||8005;
 
 // app.use(express.json())
 app.use(cors({
-    origin:'https://final-project-frontend-alpha.vercel.app',
+    origin:'*',
     methods:["GET","POST","PUT","DELETE"]
 }))
 app.use(express.json()); 
